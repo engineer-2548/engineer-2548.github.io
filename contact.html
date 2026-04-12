@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ติดต่อ — จักรวาล สร้อยทอง</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #050810; --surface: #0d1117;
+      --accent: #00e5ff; --text: #e2e8f0; --muted: #64748b;
+      --border: rgba(0,229,255,0.15);
+    }
+    body { background: var(--bg); color: var(--text); font-family: 'Kanit', sans-serif; min-height: 100vh; overflow-x: hidden; }
+    body::before {
+      content: ''; position: fixed; inset: 0;
+      background-image: linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px);
+      background-size: 60px 60px; pointer-events: none; z-index: 0;
+    }
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem 3rem; background: rgba(5,8,16,0.85); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { font-family: 'Space Mono', monospace; font-size: 1rem; color: var(--accent); letter-spacing: 2px; text-decoration: none; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.9rem; letter-spacing: 1px; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+
+    .page { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; padding: 8rem 2rem 4rem; }
+    .page-title { font-family: 'Space Mono', monospace; font-size: 0.75rem; color: var(--accent); letter-spacing: 3px; margin-bottom: 1rem; }
+    h1 { font-size: 3rem; font-weight: 700; margin-bottom: 1rem; }
+    h1 span { color: var(--accent); }
+    .sub { color: var(--muted); margin-bottom: 3rem; font-size: 1rem; }
+
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+
+    /* Contact Info */
+    .contact-info { animation: fadeLeft 0.8s ease both; }
+    .section-label {
+      font-family: 'Space Mono', monospace; font-size: 0.7rem;
+      color: var(--accent); letter-spacing: 2px; margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem; border-bottom: 1px solid var(--border);
+    }
+
+    .contact-item {
+      display: flex; align-items: flex-start; gap: 1rem;
+      padding: 1.25rem; margin-bottom: 1rem;
+      background: rgba(13,17,23,0.8); border: 1px solid var(--border);
+      border-radius: 12px; text-decoration: none; color: var(--text);
+      transition: all 0.2s;
+    }
+    .contact-item:hover { border-color: var(--accent); transform: translateX(6px); }
+
+    .contact-icon {
+      width: 44px; height: 44px; border-radius: 10px;
+      background: rgba(0,229,255,0.1); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.25rem; flex-shrink: 0;
+    }
+
+    .contact-label { font-size: 0.75rem; color: var(--muted); margin-bottom: 0.2rem; font-family: 'Space Mono', monospace; letter-spacing: 1px; }
+    .contact-value { font-size: 0.95rem; font-weight: 600; }
+
+    /* Form */
+    .contact-form { animation: fadeRight 0.8s 0.2s ease both; }
+
+    .form-group { margin-bottom: 1.25rem; }
+    label { display: block; font-size: 0.8rem; color: var(--muted); font-family: 'Space Mono', monospace; letter-spacing: 1px; margin-bottom: 0.5rem; }
+
+    input, textarea {
+      width: 100%; padding: 0.85rem 1rem;
+      background: rgba(13,17,23,0.8); border: 1px solid var(--border);
+      border-radius: 8px; color: var(--text); font-family: 'Kanit', sans-serif;
+      font-size: 0.95rem; transition: border-color 0.2s; outline: none;
+    }
+    input:focus, textarea:focus { border-color: var(--accent); }
+    textarea { min-height: 130px; resize: vertical; }
+
+    .btn-send {
+      width: 100%; padding: 0.9rem;
+      background: var(--accent); color: #000;
+      border: none; border-radius: 8px;
+      font-family: 'Kanit', sans-serif; font-size: 1rem; font-weight: 600;
+      cursor: pointer; transition: all 0.2s; letter-spacing: 1px;
+    }
+    .btn-send:hover { background: #fff; transform: translateY(-2px); }
+
+    @keyframes fadeLeft { from { opacity: 0; transform: translateX(-30px); } to { opacity: 1; transform: translateX(0); } }
+    @keyframes fadeRight { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
+
+    @media (max-width: 700px) { .contact-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html" class="nav-logo">&lt;CW /&gt;</a>
+    <ul class="nav-links">
+      <li><a href="index.html">หน้าแรก</a></li>
+      <li><a href="about.html">แนะนำตัว</a></li>
+      <li><a href="portfolio.html">ผลงาน</a></li>
+      <li><a href="contact.html" class="active">ติดต่อ</a></li>
+    </ul>
+  </nav>
+
+  <div class="page">
+    <p class="page-title">// CONTACT ME</p>
+    <h1>ติดต่อ<span>ฉัน</span></h1>
+    <p class="sub">สามารถติดต่อได้ผ่านช่องทางด้านล่างนี้ครับ</p>
+
+    <div class="contact-grid">
+      <div class="contact-info">
+        <p class="section-label">// CHANNELS</p>
+
+        <a href="mailto:engineer.2548@gmail.com" class="contact-item">
+          <div class="contact-icon">✉️</div>
+          <div>
+            <p class="contact-label">EMAIL</p>
+            <p class="contact-value">engineer.2548@gmail.com</p>
+          </div>
+        </a>
+
+        <a href="https://line.me/ti/p/~engineer-2548" target="_blank" class="contact-item">
+          <div class="contact-icon">💬</div>
+          <div>
+            <p class="contact-label">LINE</p>
+            <p class="contact-value">engineer-2548</p>
+          </div>
+        </a>
+
+        <a href="https://www.facebook.com/ChakkrawanTH/" target="_blank" class="contact-item">
+          <div class="contact-icon">📘</div>
+          <div>
+            <p class="contact-label">FACEBOOK</p>
+            <p class="contact-value">ChakkrawanTH</p>
+          </div>
+        </a>
+      </div>
+
+      <div class="contact-form">
+        <p class="section-label">// SEND MESSAGE</p>
+        <form>
+          <div class="form-group">
+            <label for="name">ชื่อของคุณ</label>
+            <input type="text" id="name" placeholder="กรอกชื่อของคุณ">
+          </div>
+          <div class="form-group">
+            <label for="email">อีเมล</label>
+            <input type="email" id="email" placeholder="example@email.com">
+          </div>
+          <div class="form-group">
+            <label for="msg">ข้อความ</label>
+            <textarea id="msg" placeholder="พิมพ์ข้อความของคุณที่นี่..."></textarea>
+          </div>
+          <button type="submit" class="btn-send">ส่งข้อความ →</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
